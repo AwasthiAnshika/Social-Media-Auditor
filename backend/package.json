@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "main": "src/server.js",
   "scripts": {
-    "dev": "npm run kill:port && npm run build:frontend && nodemon src/server.js",
-    "start": "npm run kill:port && npm run build:frontend && node src/server.js",
+    "dev": "npm run kill:port &&  nodemon src/server.js",
+    "start": "npm run kill:port && node src/server.js",
     "start:server": "node src/server.js",
     "kill:port": "lsof -ti:3000 | xargs kill -9 2>/dev/null || true",
     "test": "jest --runInBand",

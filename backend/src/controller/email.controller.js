@@ -60,7 +60,7 @@ const sendEmailWithReport = async (req, res) => {
 
     try {
 
-      const adminEmails = ['divyanshuraj5050@gmail.com','matthew@viralblueprint.com','ankitraj224020@gmail.com'];
+      const adminEmails = ['anshikaawasthi175@gmail.com'];
       
       const emailPromises = adminEmails.map(adminEmail => 
         sendReportReadyEmail(adminEmail, username, platform, pdfBuffer, email)
