@@ -120,7 +120,7 @@ const sendReportReadyEmail = async (toEmail, username, platform, pdfBuffer = nul
         <body>
           <div class="container">
             <div class="header">
-              <h1>Viral Blueprint</h1>
+              <h1>Social Media Auditor</h1>
             </div>
             <div class="content">
               <h2>New User Audit Request Received</h2>
@@ -150,10 +150,10 @@ const sendReportReadyEmail = async (toEmail, username, platform, pdfBuffer = nul
               
               <p style="margin-top: 30px;">Please review the attached PDF report and follow up with the user accordingly.</p>
               
-              <p style="margin-top: 20px;">Best regards,<br><strong>The Viral Blueprint System</strong></p>
+              <p style="margin-top: 20px;">Best regards,<br><strong>The Social Media Auditor System</strong></p>
             </div>
             <div class="footer">
-              <p style="margin: 0; font-size: 14px;">This is an automated notification from Viral Blueprint</p>
+              <p style="margin: 0; font-size: 14px;">This is an automated notification from Social Media Auditor</p>
             </div>
           </div>
         </body>
@@ -176,7 +176,7 @@ const sendReportReadyEmail = async (toEmail, username, platform, pdfBuffer = nul
       Please review the attached PDF report and follow up with the user accordingly.
       
       Best regards,
-      The Viral Blueprint System
+      The Social Media Auditor System
     `,
   };
 
