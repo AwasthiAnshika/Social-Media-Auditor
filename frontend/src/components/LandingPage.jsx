@@ -61,139 +61,72 @@ function LandingPage({ onSubmit }) {
   }, [isDropdownOpen])
 
   return (
-    <div className="w-full">
-      {/* Hero Section - TOP OF SCREEN */}
-      <div className="text-center py-2 px-4 sm:py-3">
-        <div className="max-w-[520px] mx-auto pt-8 sm:pt-12 md:pt-16">
-          <div className="bg-vb-accent border-4 border-vb-accent rounded-lg p-6 sm:p-8 transform transition-all">
-            <div className="text-center mb-6">
-              <h3 className="text-l sm:text-xl font-bold text-white mb-2">
-                Your Views Aren't Random — Let's Prove It.
-              </h3>
-              <p className="text-base text-white font-medium">
-                Stop Guessing Why Some Videos Die.
-              </p>
+    <div className="w-full app-container">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        {/* Left: Hero text */}
+        <div className="fade-in">
+          <h2 className="text-4xl md:text-5xl font-extrabold leading-tight">
+            Your Views Aren't Random — <span className="accent">Let's Prove It.</span>
+          </h2>
+          <p className="mt-4 muted max-w-lg">
+            Get a professionally generated audit of any public profile — no login, no access. Discover what works and scale your reach.
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <div className="glass-card px-4 py-2 rounded-lg">
+              <strong>✓</strong> No login required
+            </div>
+            <div className="glass-card px-4 py-2 rounded-lg">
+              <strong>✓</strong> No posting access needed
+            </div>
+            <div className="glass-card px-4 py-2 rounded-lg">
+              <strong>✓</strong> Instant results
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Form card */}
+        <div className="glass-card p-6 md:p-8">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="username" className="block text-sm font-medium muted mb-2">
+                User Handle
+              </label>
+              <input id="username" type="text" value={username} onChange={(e)=>{setUsername(e.target.value); setErrors({...errors, username:''})}} placeholder="e.g. @yourhandle" className="input" />
+              {errors.username && <p className="text-sm text-red-400 mt-1">{errors.username}</p>}
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Social Handle Input */}
-              <div>
-                <label htmlFor="username" className="block text-sm font-medium text-white mb-2 text-left">
-                  User Name
-                </label>
-                <input
-                  id="username"
-                  type="text"
-                  value={username}
-                  onChange={(e) => {
-                    setUsername(e.target.value)
-                    setErrors({ ...errors, username: '' })
-                  }}
-                    placeholder="User Name"
-                  className={`w-full px-4 py-3 rounded border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white bg-black text-white placeholder-gray-400 ${
-                    errors.username ? 'border-white' : 'border-black focus:border-white'
-                  }`}
-                />
-                {errors.username && (
-                  <p className="mt-1 text-sm text-white text-left">{errors.username}</p>
-                )}
-              </div>
-
-              {/* Platform Dropdown */}
-              <div className="relative" ref={dropdownRef}>
-                <label className="block text-sm font-medium text-white mb-2 text-left">
-                  Select Platform
-                </label>
-                <button
-                  type="button"
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className={`w-full px-4 py-3 rounded border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white flex items-center justify-between bg-black text-white ${
-                    errors.platform ? 'border-white' : 'border-black focus:border-white'
-                  } ${isDropdownOpen ? 'border-white' : ''}`}
-                >
-                  <div className="flex items-center space-x-3">
-                    {selectedPlatformData ? (
-                      <>
-                        <SelectedIcon className="w-5 h-5" />
-                        <span className="text-white">{selectedPlatformData.name}</span>
-                      </>
-                    ) : (
-                      <span className="text-gray-400">Select Platform</span>
-                    )}
+            <div ref={dropdownRef}>
+              <label className="block text-sm font-medium muted mb-2">Platform</label>
+              <div className="relative">
+                <button type="button" onClick={()=>setIsDropdownOpen(!isDropdownOpen)} className="select flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    {selectedPlatformData ? <><SelectedIcon className="w-5 h-5" /> <span>{selectedPlatformData.name}</span></> : <span className="muted">Select platform</span>}
                   </div>
-                  <svg
-                    className={`w-5 h-5 transition-transform duration-200 ${isDropdownOpen ? 'transform rotate-180' : ''}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                  <svg className={`w-5 h-5 transition-transform ${isDropdownOpen ? 'transform rotate-180':''}`} viewBox="0 0 24 24" fill="none"><path d="M19 9l-7 7-7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </button>
-                
+
                 {isDropdownOpen && (
-                  <div className="absolute z-10 w-full mt-2 bg-black rounded border-2 border-white shadow-lg overflow-hidden">
-                    {platforms.map((platform) => {
-                      const Icon = platform.icon
+                  <div className="absolute z-10 w-full mt-2 glass-card p-2">
+                    {platforms.map(p=>{
+                      const Icon = p.icon
                       return (
-                        <button
-                          key={platform.id}
-                          type="button"
-                          onClick={() => handlePlatformSelect(platform.id)}
-                          className={`w-full px-4 py-3 flex items-center space-x-3 hover:bg-gray-900 transition-colors duration-150 text-left ${
-                            selectedPlatform === platform.id ? 'bg-gray-900' : ''
-                          }`}
-                        >
-                          <Icon className="w-5 h-5 text-white" />
-                          <span className="text-white">{platform.name}</span>
-                          {selectedPlatform === platform.id && (
-                            <svg className="w-5 h-5 text-vb-accent ml-auto" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                            </svg>
-                          )}
+                        <button key={p.id} type="button" onClick={()=>handlePlatformSelect(p.id)} className={`w-full text-left px-3 py-2 rounded hover:bg-white/4 ${selectedPlatform===p.id?'bg-white/6':''}`}>
+                          <div className="flex items-center gap-3"><Icon className="w-5 h-5" /> <span>{p.name}</span></div>
                         </button>
                       )
                     })}
                   </div>
                 )}
-                {errors.platform && (
-                  <p className="mt-1 text-sm text-white text-left">{errors.platform}</p>
-                )}
               </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full bg-black text-white py-3 rounded font-semibold text-base hover:bg-gray-900 transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 flex items-center justify-center gap-2 animate-pulse-subtle group"
-              >
-                <span>Run My Free Audit</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 animate-pulse-slow" />
-              </button>
-            </form>
-          </div>
-
-          {/* Trust Bullets */}
-          <div className="mt-6 flex flex-wrap justify-center gap-3 sm:gap-4">
-            <div className="bg-vb-accent text-white px-4 py-2 rounded border-2 border-vb-accent font-semibold text-sm flex items-center shadow-md">
-              <span className="mr-2">✓</span>
-              <span>No login required</span>
+              {errors.platform && <p className="text-sm text-red-400 mt-1">{errors.platform}</p>}
             </div>
-            <div className="bg-vb-accent text-white px-4 py-2 rounded border-2 border-vb-accent font-semibold text-sm flex items-center shadow-md">
-              <span className="mr-2">✓</span>
-              <span>No posting access needed</span>
-            </div>
-            <div className="bg-vb-accent text-white px-4 py-2 rounded border-2 border-vb-accent font-semibold text-sm flex items-center shadow-md">
-              <span className="mr-2">✓</span>
-              <span>Instant results</span>
-            </div>
-          </div>
 
-          {/* Closing Line */}
-          <div className="mt-6 max-w-3xl mx-auto px-4">
-            <p className="text-sm sm:text-base md:text-lg font-semibold text-vb-text leading-tight text-center">
-              Your next viral video starts with understanding your last one. <span className="text-vb-accent font-bold">Don't leave millions of views on the table.</span>
-            </p>
-          </div>
+            <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2">
+              <span>Run My Free Audit</span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </form>
         </div>
       </div>
     </div>

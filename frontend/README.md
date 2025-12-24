@@ -1,48 +1,62 @@
-# Fleeting Films Frontend
+# Frontend
 
-A beautiful, modern React frontend for the Fleeting Films profile analysis application.
+This folder contains the Vite + React frontend for the Social Media Auditor app.
 
-## Features
+Quick start
+ - Install dependencies:
+	 ```bash
+	 cd frontend
+	 npm install
+	 ```
 
-- 🎨 Sleek, modern UI with gradient backgrounds and smooth animations
-- 📱 Responsive design that works on all devices
-- 🎯 Platform selection with icons (YouTube, Instagram, TikTok)
-- ⚡ Smooth transitions between components
-- ✨ Beautiful loading animations during profile analysis
+ - Run the dev server:
+	 ```bash
+	 npm run dev
+	 ```
 
-## Setup
+ - Build for production:
+	 ```bash
+	 npm run build
+	 ```
 
-1. Install dependencies:
-```bash
-cd frontend
-npm install
-```
+ - Preview the production build:
+	 ```bash
+	 npm run preview
+	 ```
 
-2. Start the development server:
-```bash
-npm run dev
-```
+Notes & troubleshooting
+- Node: use a modern Node.js (18+) for best compatibility.
+- If you see missing package errors, run `npm install` inside `frontend`.
+- If you changed CSS and don't see the update, restart the dev server and hard-refresh your browser.
 
-The app will be available at `http://localhost:3000`
+Project structure (important files)
+- `src/index.css` — global styles and theme variables (the new dark/glass theme lives here). To change colors and gradients, edit the CSS variables at the top of this file.
+- `src/components/*` — main UI components: `Header.jsx`, `LandingPage.jsx`, `Analyzing.jsx`, `EmailCollection.jsx`.
+- `src/assets/` — local images and SVGs used by the UI.
+- `index.html` — HTML entry; Google Fonts are loaded here.
 
-## Build for Production
+Theme compatibility
+- The project includes legacy utility classes (like `bg-vb-bg`, `text-vb-text`, `bg-vb-accent`) — these are mapped in `src/index.css` to the new dark/glass palette. If you want to fully migrate components to the new utilities, edit `src/index.css` and replace legacy class uses in the components.
 
-```bash
-npm run build
-```
+Styling tools
+- Tailwind CSS directives are present in `src/index.css`. If you modify Tailwind config or add new utilities, re-run the dev server.
 
-The built files will be in the `dist` directory.
+Running backend + frontend together
+- From the project root you can run both servers (if configured) with:
+	```bash
+	npm run dev:all
+	```
+	This delegates to the backend `dev` script and the frontend dev script.
 
-## Components
+Customization checklist
+- Colors & gradients: edit `:root` variables in `src/index.css`.
+- Spacing, radii, shadows: adjust the `.glass-card`, `.btn-primary`, and utility classes in `src/index.css`.
+- Copy/text: update component strings in `src/components/*`.
 
-- **LandingPage**: Initial form with username input and platform dropdown
-- **Analyzing**: Animated loading screen that shows for 1-2 minutes
-- **EmailCollection**: Email collection form with success message
+If you'd like, I can:
+- Add a design token file (JSON/CSS) for easier theme changes.
+- Replace legacy `vb-*` classes across the components with the new utilities.
+- Add more polished SVG illustrations into `src/assets/`.
 
-## Tech Stack
-
-- React 18
-- Vite
-- Tailwind CSS
-- Lucide React (for icons)
+Enjoy — open `http://localhost:3000` after starting the frontend dev server to view the app.
 

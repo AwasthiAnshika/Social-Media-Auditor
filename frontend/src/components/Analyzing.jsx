@@ -50,70 +50,43 @@ function Analyzing({ username, platform, onComplete, onError }) {
   }
 
   return (
-    <div className="w-full max-w-2xl">
-      <div className="bg-vb-bg border-2 border-vb-text rounded-lg p-12 text-center space-y-8">
-        {/* Animated Icon */}
-        <div className="flex justify-center">
-          <div className="relative">
-            <div className="absolute inset-0 bg-purple-200 rounded-full animate-ping opacity-75"></div>
-            <div className="absolute inset-0 bg-purple-300 rounded-full animate-pulse"></div>
-            <div className="relative bg-vb-accent p-6 rounded-full">
+    <div className="w-full max-w-2xl app-container">
+      <div className="glass-card p-8 text-center">
+        <div className="flex justify-center mb-4">
+          <div className="relative w-28 h-28 center-v" style={{borderRadius: '999px'}}>
+            <div className="absolute inset-0" style={{background: 'radial-gradient(circle at 30% 30%, rgba(124,58,237,0.18), transparent)'}}></div>
+            <div className="relative center-v" style={{width:96,height:96,borderRadius:999,background:'linear-gradient(90deg,#7c3aed,#06b6d4)'}}>
               <Loader2 className="w-12 h-12 text-white animate-spin" />
             </div>
           </div>
         </div>
 
-        {/* Main Text */}
-        <div className="space-y-3">
-          <h2 className="text-3xl font-bold text-vb-text">
-            Analyzing your profile{dots}
-          </h2>
-          <p className="text-vb-text text-lg opacity-80">
-            @{username} on {platformNames[platform] || platform}
-          </p>
+        <h2 className="text-2xl md:text-3xl font-bold">Analyzing your profile{dots}</h2>
+        <p className="muted mt-2">@{username} on {platformNames[platform] || platform}</p>
+
+        <div className="mt-6">
+          <div className="w-full bg-white/6 rounded-full h-3 overflow-hidden">
+            <div className="h-full rounded-full" style={{ width: `${progress}%`, background: 'linear-gradient(90deg,#7c3aed,#06b6d4)', transition: 'width 1s ease' }} />
+          </div>
+          <p className="text-sm muted mt-2">{Math.round(progress)}% complete</p>
         </div>
 
-        {/* Progress Bar */}
-        <div className="space-y-2">
-          <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-            <div
-              className="h-full bg-vb-accent rounded-full transition-all duration-1000 ease-out relative overflow-hidden"
-              style={{ width: `${progress}%` }}
-            >
-              <div className="absolute inset-0 bg-white/30 animate-pulse"></div>
-            </div>
+        <div className="flex justify-center gap-6 mt-6">
+          <div className="center-v flex-col">
+            <div className="glass-card p-3 rounded-full center-v"><Sparkles className="w-5 h-5" /></div>
+            <div className="muted text-xs mt-2">Processing</div>
           </div>
-          <p className="text-sm text-vb-text opacity-70">{Math.round(progress)}% complete</p>
-        </div>
-
-        {/* Animated Icons */}
-        <div className="flex justify-center space-x-8 pt-4">
-          <div className="flex flex-col items-center space-y-2 animate-bounce-slow">
-            <div className="bg-gray-100 p-4 rounded-full">
-              <Sparkles className="w-6 h-6 text-vb-accent" />
-            </div>
-            <span className="text-xs text-vb-text opacity-70">Processing</span>
+          <div className="center-v flex-col">
+            <div className="glass-card p-3 rounded-full center-v"><TrendingUp className="w-5 h-5" /></div>
+            <div className="muted text-xs mt-2">Analyzing</div>
           </div>
-          <div className="flex flex-col items-center space-y-2 animate-bounce-slow" style={{ animationDelay: '0.2s' }}>
-            <div className="bg-gray-100 p-4 rounded-full">
-              <TrendingUp className="w-6 h-6 text-vb-accent" />
-            </div>
-            <span className="text-xs text-vb-text opacity-70">Analyzing</span>
-          </div>
-          <div className="flex flex-col items-center space-y-2 animate-bounce-slow" style={{ animationDelay: '0.4s' }}>
-            <div className="bg-gray-100 p-4 rounded-full">
-              <BarChart3 className="w-6 h-6 text-vb-accent" />
-            </div>
-            <span className="text-xs text-vb-text opacity-70">Generating</span>
+          <div className="center-v flex-col">
+            <div className="glass-card p-3 rounded-full center-v"><BarChart3 className="w-5 h-5" /></div>
+            <div className="muted text-xs mt-2">Generating</div>
           </div>
         </div>
 
-        {/* Status Messages */}
-        <div className="pt-4">
-          <p className="text-sm text-vb-text opacity-70 animate-pulse">
-            {status}
-          </p>
-        </div>
+        <div className="mt-4 muted">{status}</div>
       </div>
     </div>
   )
