@@ -20,7 +20,7 @@ async function generateYoutubePdfReport(data) {
       const { trends, hashtags, topPerformers, lowPerformers, overall, periods, topVideosAllTime, topVideosLast90Days, worstVideosAllTime, worstVideosLast90Days, lengthVsPerformance } = analytics;
 
       // Title + Channel Overview (clubbed with Executive Summary)
-      doc.fontSize(24).font('Helvetica-Bold').text('Fleeting Films', { align: 'center' });
+      doc.fontSize(24).font('Helvetica-Bold').text('Social Media Auditor', { align: 'center' });
       doc.moveDown(0.5);
       doc.fontSize(18).font('Helvetica').text('Analytics Report', { align: 'center' });
       doc.moveDown(1.5);
@@ -256,7 +256,7 @@ async function generateInstagramPdfReport(payload) {
         worstVideosLast90Days,
         lengthVsPerformance
       } = analytics;
-      doc.fontSize(24).font("Helvetica-Bold").text("Fleeting Films", { align: "center" });
+      doc.fontSize(24).font("Helvetica-Bold").text("Social Media Auditor", { align: "center" });
       doc.moveDown(0.5);
       doc.fontSize(18).font("Helvetica").text("Instagram Analytics Report", { align: "center" });
       doc.moveDown(1.5);
@@ -549,7 +549,7 @@ async function generateTikTokPdfReport(payload) {
         lengthVsPerformance
       } = analytics;
 
-      doc.fontSize(24).font("Helvetica-Bold").text("Fleeting Films", { align: "center" });
+      doc.fontSize(24).font("Helvetica-Bold").text("Social Media Auditor", { align: "center" });
       doc.moveDown(0.5);
       doc.fontSize(18).font("Helvetica").text("TikTok Analytics Report", { align: "center" });
       doc.moveDown(1.5);
